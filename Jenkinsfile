@@ -1,15 +1,10 @@
 pipeline {
-    agent {
-        docker { image 'node:16.13.1-alpine' }
-    }
+    agent all
     stages {
         stage('Build') {
             steps {
-                sh 'python helloWorld.py'
-                sh '''
-                    echo "Multiline shell steps works too"
-                    ls -lah
-                '''
+                sh 'docker build -t teucer12/helloWorld-2022 .'
+                sh 'docker run -d -p 10243:10243 --name helloWorld teucer12/helloWorld-2022'
             }
         }
         stage('Test') {
@@ -20,6 +15,8 @@ pipeline {
     }
     post {
         always {
+            docker stop helloWorld
+            docker rm helloWorld
             echo 'This will always run'
         }
         success {
