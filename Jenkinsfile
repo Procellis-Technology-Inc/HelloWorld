@@ -1,5 +1,5 @@
 pipeline {
-    agent all
+    agent any
     stages {
         stage('Build') {
             steps {
@@ -15,9 +15,11 @@ pipeline {
     }
     post {
         always {
-            docker stop helloWorld
-            docker rm helloWorld
-            echo 'This will always run'
+            steps {
+                docker stop helloWorld
+                docker rm helloWorld
+                echo 'This will always run'
+            }
         }
         success {
             echo 'This will run only if successful'
