@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                sh 'docker build -t teucer12/helloWorld-2022 .'
-                sh 'docker run -d -p 10243:10243 --name helloWorld teucer12/helloWorld-2022'
+                sh 'docker build -t teucer12/hellorld-2022 .'
+                sh 'docker run -d -p 10243:10243 --name helloWorld teucer12/helloworld-2022'
             }
         }
         stage('Test') {
