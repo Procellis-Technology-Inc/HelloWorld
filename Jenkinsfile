@@ -9,7 +9,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'node --version'
+                sh 'echo Test, you fool!'
             }
         }
         stage('Cleanup') {
