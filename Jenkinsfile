@@ -12,15 +12,18 @@ pipeline {
                 sh 'node --version'
             }
         }
+        stage('Cleanup') {
+                    steps {
+                sh 'docker stop helloWorld'
+                sh 'docker rm helloWorld'
+                }
+            }
+
     }
     post {
         always {
-            steps {
-                docker stop helloWorld
-                docker rm helloWorld
                 echo 'This will always run'
             }
-        }
         success {
             echo 'This will run only if successful'
         }
